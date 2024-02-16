@@ -87,6 +87,8 @@ void loadPreferences() {
             params[i]->type = RCLC_PARAMETER_NOT_SET;
         }
     }
+
+    parameterSettings.end();
 }
 
 void initializeParameterService() {

@@ -38,16 +38,16 @@ bool createEntities() {
     RCCHECK(rclc_node_init_default(&node, "mini_skidi_node", "", &support));
 
     // Create application components
-    createPublishers();
-    createServices();
-    createTimers();
+    // createPublishers();
+    // createServices();
+    // createTimers();
 
     // Create executor
     RCCHECK(rclc_executor_init(&executor, &support.context, 10+RCLC_EXECUTOR_PARAMETER_SERVER_HANDLES, &allocator));
-    addServices();
-    addTimers();
+    // addServices();
+    // addTimers();
 
-    initializeParameterService();
+    // initializeParameterService();
 
     return true;
 }
