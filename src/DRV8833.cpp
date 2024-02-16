@@ -10,6 +10,16 @@ DRV8833::DRV8833(uint8_t in1, uint8_t in2, bool removeMomentum) {
     pinMode(pinIn2, OUTPUT);
 }
 
+void DRV8833::forward() { 
+    if (!isEnabled) return;
+    _setBridgePins(HIGH, LOW); 
+}
+
+void DRV8833::backward() { 
+    if (!isEnabled) return;
+    _setBridgePins(LOW, HIGH); 
+}
+
 void DRV8833::stop() {
     if (removeMomentum) { _removeMomentum(); }
     _setBridgePins(LOW, LOW);

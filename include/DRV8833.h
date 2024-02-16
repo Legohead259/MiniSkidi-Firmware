@@ -2,15 +2,19 @@
 #define DRV8833_H
 
 #include <Arduino.h>
+#include "MotorInterface.h"
 
-class DRV8833 {
+class DRV8833 : MotorInterface {
     public:
         DRV8833(uint8_t in1, uint8_t in2, bool removeMomentum=false);
 
-        void forward() { _setBridgePins(HIGH, LOW); };
-        void backward() { _setBridgePins(LOW, HIGH); }
-        void stop();
-        void reversePins();
+        void forward() override;
+        void backward() override;
+        void stop() override;
+        void reversePins() override;
+
+        void enable() override { isEnabled = true; }
+        void disable() override { isEnabled = false; }
 
     private:
         uint8_t pinIn1;

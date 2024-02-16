@@ -2,6 +2,7 @@
 #define MICRO_ROS__DEFINITIONS_H
 
 #include <Arduino.h>
+#include "MotorInterface.h"
 
 // The micro_ros_platformio library provides the functions to communicate with ROS2
 #include <micro_ros_platformio.h>

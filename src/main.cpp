@@ -13,27 +13,10 @@
  */
 
 #include <Arduino.h>
-#include <SPIFFS.h>
-#include <WiFi.h>
-#include <AsyncTCP.h>
-#include <ESPAsyncWebServer.h>
 
-#include <ESP32Servo.h> //by Kevin Harrington
-#include <iostream>
-#include <sstream>
-
-// #include "pins.h"
-#include "motor_defs.h"
-#include <DRV8833.h>
-#include <Preferences.h>
 #include "micro_ros__mini_skidi.h"
 
-Preferences parameterSettings;
-
-Servo bucketServo;
-Servo auxServo;
-
-void setup(void)  {
+void setup()  {
     Serial.begin(115200);
 
     xTaskCreatePinnedToCore(

@@ -4,7 +4,6 @@ rcl_allocator_t allocator;
 rclc_support_t support;
 rcl_node_t node;
 rclc_executor_t executor;
-rcl_timer_t neopixelTimer;
 TaskHandle_t MicroROSTask;
 AgentState agentState = WAITING_AGENT;
 
@@ -92,7 +91,6 @@ void microROSTaskCallback(void* parameters) {
             case AGENT_DISCONNECTED:
                 destroyEntities();
                 agentState = WAITING_AGENT;
-                changeSystemState(IDLE_NO_CONNECTION);
                 motor.disable();
                 break;
                 
