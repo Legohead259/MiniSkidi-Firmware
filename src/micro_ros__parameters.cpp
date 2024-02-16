@@ -55,7 +55,7 @@ parameter_t* params[NUM_PARAMETERS] = {
 };
 
 void loadPreferences() {
-    parameterSettings.begin("uros_params", false);
+    parameterSettings.begin("params", false);
     
     if (!parameterSettings.isKey(PARAM_NAME__WIFI_AP_SSID)) { // Check for first run and initialize with defaults
         parameterSettings.putString(PARAM_NAME__WIFI_AP_SSID, "MiniSkidi");

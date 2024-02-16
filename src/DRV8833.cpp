@@ -4,6 +4,7 @@ DRV8833::DRV8833(uint8_t in1, uint8_t in2, bool removeMomentum) {
     pinIn1 = in1;
     pinIn2 = in2;
     removeMomentum = removeMomentum;
+    isEnabled = false;
 
     pinMode(pinIn1, OUTPUT);
     pinMode(pinIn2, OUTPUT);

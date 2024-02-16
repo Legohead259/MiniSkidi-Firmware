@@ -29,11 +29,11 @@
 } while (0)\
 
 // Get the custom actions form the `motor_interfaces` package
-// #include "motor_interfaces/action/home.h"
+#include <sensor_msgs/msg/joy.h>
 
 // Interface type format {package}__{interface [action/srv/msg]}__{InterfaceName}_{Additional [Response/Request]}
-
 // Redeclare types for readability
+using JoystickMsg = sensor_msgs__msg__Joy;
 
 // Instantiate ROS2 base objects
 extern rcl_allocator_t allocator;

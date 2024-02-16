@@ -16,6 +16,7 @@ class DRV8833 {
         uint8_t pinIn1;
         uint8_t pinIn2;
         bool removeMomentum;
+        bool isEnabled;
 
         void _removeMomentum();
         void _setBridgePins(bool in1, bool in2);
