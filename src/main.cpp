@@ -29,7 +29,9 @@
 // #include "pins.h"
 #include "motor_defs.h"
 #include <DRV8833.h>
-#include <ArduinoJson.h>
+#include <Preferences.h>
+
+Preferences parameterSettings;
 
 Servo bucketServo;
 Servo auxServo;
