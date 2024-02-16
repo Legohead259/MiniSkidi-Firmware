@@ -7,6 +7,7 @@ class MotorInterface {
         virtual void backward();
         virtual void stop();
         virtual void reversePins();
+        virtual void setRemoveMomentum(bool isRemoved);
         virtual void enable();
         virtual void disable();
         virtual ~MotorInterface() {}

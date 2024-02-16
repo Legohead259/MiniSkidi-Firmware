@@ -13,6 +13,7 @@ class DRV8833 : MotorInterface {
         void stop() override;
         void reversePins() override;
 
+        void setRemoveMomentum(bool isRemoved) override { removeMomentum = isRemoved; }
         void enable() override { isEnabled = true; }
         void disable() override { isEnabled = false; }
 

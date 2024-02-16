@@ -3,9 +3,9 @@
 
 #include "micro_ros__definitions.h"
 
-extern MotorInterface* leftMotor;
-extern MotorInterface* rightMotor;
-extern MotorInterface* armMotor;
+extern MotorInterface* _leftMotor;
+extern MotorInterface* _rightMotor;
+extern MotorInterface* _armMotor;
 
 void attachMotors(MotorInterface* left, MotorInterface* right, MotorInterface* arm);
 void forward();

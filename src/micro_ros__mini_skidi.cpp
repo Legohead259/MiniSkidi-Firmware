@@ -1,10 +1,10 @@
 #include "micro_ros__mini_skidi.h"
 
+TaskHandle_t MicroROSTask;
 rcl_allocator_t allocator;
 rclc_support_t support;
 rcl_node_t node;
 rclc_executor_t executor;
-TaskHandle_t MicroROSTask;
 AgentState agentState = WAITING_AGENT;
 
 bool createPublishers() {
@@ -72,11 +72,11 @@ void microROSTaskCallback(void* parameters) {
             case AGENT_AVAILABLE:
                 agentState = createEntities() ? AGENT_CONNECTED : WAITING_AGENT; // Check if entities are properly created
                 if (agentState == AGENT_CONNECTED) { // Update system state
-                    motor.enable();
+                    enableMotors();
                 }
                 if (agentState == WAITING_AGENT) { // If entities are not properly created, destroy them
                     destroyEntities();
-                    motor.disable();
+                    disableMotors();
                 };
                 break;
             
@@ -91,7 +91,7 @@ void microROSTaskCallback(void* parameters) {
             case AGENT_DISCONNECTED:
                 destroyEntities();
                 agentState = WAITING_AGENT;
-                motor.disable();
+                disableMotors();
                 break;
                 
             default:

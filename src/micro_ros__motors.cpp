@@ -1,66 +1,66 @@
 #include "micro_ros__motors.h"
 
-MotorInterface* leftMotor;
-MotorInterface* rightMotor;
-MotorInterface* armMotor;
+MotorInterface* _leftMotor;
+MotorInterface* _rightMotor;
+MotorInterface* _armMotor;
 
 void attachMotors(MotorInterface* left, MotorInterface* right, MotorInterface* arm) {
-    leftMotor = left;
-    rightMotor = right;
-    armMotor = arm;
+    _leftMotor = left;
+    _rightMotor = right;
+    _armMotor = arm;
 }
 
 void forward() {
-    if (leftMotor == nullptr || rightMotor == nullptr) return;
-    leftMotor->forward();
-    rightMotor->forward();
+    if (_leftMotor == nullptr || _rightMotor == nullptr) return;
+    _leftMotor->forward();
+    _rightMotor->forward();
 }
 
 void backward() {
-    if (leftMotor == nullptr || rightMotor == nullptr) return;
-    leftMotor->backward();
-    rightMotor->backward();
+    if (_leftMotor == nullptr || _rightMotor == nullptr) return;
+    _leftMotor->backward();
+    _rightMotor->backward();
 }
 
 void turnLeft() {
-    if (leftMotor == nullptr || rightMotor == nullptr) return;
-    leftMotor->backward();
-    rightMotor->forward();
+    if (_leftMotor == nullptr || _rightMotor == nullptr) return;
+    _leftMotor->backward();
+    _rightMotor->forward();
 }
 
 void turnRight() {
-    if (leftMotor == nullptr || rightMotor == nullptr) return;
-    leftMotor->forward();
-    rightMotor->backward();
+    if (_leftMotor == nullptr || _rightMotor == nullptr) return;
+    _leftMotor->forward();
+    _rightMotor->backward();
 }
 
 void raiseArm() {
-    if (armMotor == nullptr) return;
-    armMotor->forward();
+    if (_armMotor == nullptr) return;
+    _armMotor->forward();
 }
 
 void lowerArm() {
-    if (armMotor == nullptr) return;
-    armMotor->backward();
+    if (_armMotor == nullptr) return;
+    _armMotor->backward();
 }
 
 void stop() {
-    if (leftMotor == nullptr || rightMotor == nullptr || armMotor == nullptr) return;
-    leftMotor->stop();
-    rightMotor->stop();
-    armMotor->stop();
+    if (_leftMotor == nullptr || _rightMotor == nullptr || _armMotor == nullptr) return;
+    _leftMotor->stop();
+    _rightMotor->stop();
+    _armMotor->stop();
 }
 
 void enableMotors() {
-    if (leftMotor == nullptr || rightMotor == nullptr || armMotor == nullptr) return;
-    leftMotor->enable();
-    rightMotor->enable();
-    armMotor->enable();
+    if (_leftMotor == nullptr || _rightMotor == nullptr || _armMotor == nullptr) return;
+    _leftMotor->enable();
+    _rightMotor->enable();
+    _armMotor->enable();
 }
 
 void disableMotors() {
-    if (leftMotor == nullptr || rightMotor == nullptr || armMotor == nullptr) return;
-    leftMotor->disable();
-    rightMotor->disable();
-    armMotor->disable();
+    if (_leftMotor == nullptr || _rightMotor == nullptr || _armMotor == nullptr) return;
+    _leftMotor->disable();
+    _rightMotor->disable();
+    _armMotor->disable();
 }

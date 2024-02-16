@@ -72,25 +72,12 @@ void saveParam(parameter_t* param);
 // ==================================
 
 
-void controllerModeChangeCallback(parameter_t* param);
-void polePairsChangeCallback(parameter_t* param);
-void phaseResistanceChangeCallback(parameter_t* param);
-void kvRatingChangeCallback(parameter_t* param);
-void phaseInductanceChangeCallback(parameter_t* param);
-void velocityPChangeCallback(parameter_t* param);
-void velocityIChangeCallback(parameter_t* param);
-void velocityDChangeCallback(parameter_t* param);
-void velocityRampChangeCallback(parameter_t* param);
-void velocityLPFChangeCallback(parameter_t* param);
-void anglePChangeCallback(parameter_t* param);
-void angleIChangeCallback(parameter_t* param);
-void angleDChangeCallback(parameter_t* param);
-void angleRampChangeCallback(parameter_t* param);
-void angleLFPChangeCallback(parameter_t* param);
-void driverVoltageLimitChangeCallback(parameter_t* param);
-void driverCurrentLimitChangeCallback(parameter_t* param);
-void motorVoltageLimitChangeCallback(parameter_t* param);
-void motorCurrentLimitChangeCallback(parameter_t* param);
-void motorVelocityLimitChangeCallback(parameter_t* param);
+void wirelessModeChangeCallback(parameter_t* param);
+void reverseLeftChangeCallback(parameter_t* param);
+void reverseRightChangeCallback(parameter_t* param);
+void reverseArmChangeCallback(parameter_t* param);
+void removeMomentumLeftChangeCallback(parameter_t* param);
+void removeMomentumRightChangeCallback(parameter_t* param);
+void removeMomentumArmChangeCallback(parameter_t* param);
 
 #endif // MICRO_ROS__PARAMETERS_H
