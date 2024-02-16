@@ -7,6 +7,13 @@
 
 extern TaskHandle_t MicroROSTask;
 
+bool createPublishers();
+bool createServices();
+bool addServices();
+bool createTimers();
+bool addTimers();
+bool createEntities();
+void destroyEntities();
 void microROSTaskCallback(void* parameters);
 
 #endif // MICRO_ROS__MINI_SKIDI_H

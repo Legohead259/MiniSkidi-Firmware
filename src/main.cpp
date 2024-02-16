@@ -18,8 +18,9 @@
 
 void setup()  {
     Serial.begin(115200);
-    Serial.print("Attaching MicroROS Task...");
 
+    pinMode(LED_BUILTIN, OUTPUT);
+    
     xTaskCreatePinnedToCore(
         microROSTaskCallback, /* Function to implement the task */
         "microROS", /* Name of the task */
@@ -27,13 +28,11 @@ void setup()  {
         NULL,  /* Task input parameter */
         0,  /* Priority of the task */
         &MicroROSTask,  /* Task handle. */
-        1); /* Core where the task should run */
+        0); /* Core where the task should run */
 
-    Serial.println("done!");
-    
     set_microros_serial_transports(Serial); // Configure Micro-ROS library to use Arduino serial
 }
 
 void loop() {
-
+    
 }
