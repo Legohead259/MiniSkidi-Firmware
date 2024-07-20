@@ -24,7 +24,7 @@
         "arduino",
         "espidf"
     ],
-    "name": "Mini Skiddy Rev 2",
+    "name": "Mini Skidi Rev 2",
     "upload": {
         "flash_size": "4MB",
         "maximum_ram_size": 327680,
