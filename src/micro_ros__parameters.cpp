@@ -8,6 +8,7 @@
 Preferences parameterSettings;
 
 rclc_parameter_server_t parameterService;
+
 parameter_t wirelessMode = {
     .key=PARAM_NAME__WIRELESS_MODE, 
     .type=RCLC_PARAMETER_INT,
@@ -63,7 +64,7 @@ void loadPreferences() {
         parameterSettings.putString(PARAM_NAME__WIFI_CLIENT_SSID, "");
         parameterSettings.putString(PARAM_NAME__WIFI_CLIENT_PASSKEY, "");
         parameterSettings.putString(PARAM_NAME__DEVICE_NAME, "MiniSkidi");
-        parameterSettings.putUInt(PARAM_NAME__WIRELESS_MODE, 0);
+        parameterSettings.putInt(PARAM_NAME__WIRELESS_MODE, 0);
         parameterSettings.putBool(PARAM_NAME__REVERSE_LEFT, false);
         parameterSettings.putBool(PARAM_NAME__REVERSE_RIGHT, false);
         parameterSettings.putBool(PARAM_NAME__REVERSE_ARM, false);

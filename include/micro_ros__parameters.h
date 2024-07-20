@@ -7,13 +7,10 @@
 // === PARAMETER DEFINTIONS ===
 // ============================
 
-
-#ifdef ARDUINO_ARCH_ESP32
+extern rclc_parameter_server_t parameterService;
 extern Preferences parameterSettings;
-#endif // ARDUINO_ARCH_ESP32
 
 // NOTE: Due to restrictions within the Preferences library, parameter names are limited to 16 characters!
-
 #define PARAM_NAME__WIFI_AP_SSID "ap_ssid"
 #define PARAM_NAME__WIFI_AP_PASSKEY "ap_passkey"
 #define PARAM_NAME__WIFI_CLIENT_SSID "client_ssid"
@@ -63,7 +60,7 @@ const rclc_parameter_options_t parameterServiceOpts = {
 };
 
 void initializeParameterService();
-
+bool onParameterChangedCallback(const Parameter* oldParam, const Parameter* newParam, void* context);
 void saveParam(parameter_t* param);
 
 

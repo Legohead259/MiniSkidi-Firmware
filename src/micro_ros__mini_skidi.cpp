@@ -12,10 +12,20 @@ bool createPublishers() {
 }
 
 bool createServices() {
+    RCCHECK(rclc_parameter_server_init_with_option(
+        &parameterService, 
+        &node,
+        &parameterServiceOpts));
+    
     return true;
 }
 
 bool addServices() {
+    RCCHECK(rclc_executor_add_parameter_server(
+        &executor, 
+        &parameterService, 
+        onParameterChangedCallback));
+    
     return true; 
 }
 
@@ -38,14 +48,14 @@ bool createEntities() {
     RCCHECK(rclc_node_init_default(&node, "mini_skidi_node", "", &support));
 
     // Create application components
-    // createPublishers();
-    // createServices();
-    // createTimers();
+    createPublishers();
+    createServices();
+    createTimers();
 
     // Create executor
     RCCHECK(rclc_executor_init(&executor, &support.context, 10+RCLC_EXECUTOR_PARAMETER_SERVER_HANDLES, &allocator));
     // addServices();
-    // addTimers();
+    addTimers();
 
     // initializeParameterService();
 
@@ -56,6 +66,7 @@ void destroyEntities() {
     rmw_context_t * rmw_context = rcl_context_get_rmw_context(&support.context);
     (void) rmw_uros_set_context_entity_destroy_session_timeout(rmw_context, 0);
 
+    RCSOFTCHECK(rclc_parameter_server_fini(&parameterService, &node));
     RCSOFTCHECK(rclc_executor_fini(&executor));
     RCSOFTCHECK(rcl_node_fini(&node));
     RCSOFTCHECK(rclc_support_fini(&support));
