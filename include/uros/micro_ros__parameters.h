@@ -1,7 +1,7 @@
 #ifndef MICRO_ROS__PARAMETERS_H
 #define MICRO_ROS__PARAMETERS_H
 
-#include "micro_ros__definitions.h"
+#include "uros/micro_ros__definitions.h"
 
 // ============================
 // === PARAMETER DEFINTIONS ===

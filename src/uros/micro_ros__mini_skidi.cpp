@@ -1,13 +1,51 @@
-#include "micro_ros__mini_skidi.h"
+#include "uros/micro_ros__mini_skidi.h"
 
 TaskHandle_t MicroROSTask;
 rcl_allocator_t allocator;
 rclc_support_t support;
 rcl_node_t node;
 rclc_executor_t executor;
+MiniSkidi* miniSkidiPtr;
 AgentState agentState = WAITING_AGENT;
 
 bool createPublishers() {
+    RCCHECK(rclc_publisher_init_default(
+        &skidiControlPublisher,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool),
+        "/skidi_control"));
+
+    return true;
+}
+
+bool createSubscribers() {
+    RCCHECK(rclc_subscription_init_best_effort(
+        &joySubscriber,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, Joy),
+        "joy"));
+
+    // Initialize subscriber message memory
+    micro_ros_utilities_memory_conf_t conf = {
+        .max_ros2_type_sequence_capacity = 20,
+        .max_basic_type_sequence_capacity = 20,
+    };
+    micro_ros_utilities_create_message_memory(
+        ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, Joy),
+        &joystickMsg,
+        conf);
+    
+    return true;
+}
+
+bool addSubscribers() {    
+    RCCHECK(rclc_executor_add_subscription(
+        &executor, 
+        &joySubscriber, 
+        &joystickMsg, 
+        &joystickCallback, 
+        ON_NEW_DATA));
+    
     return true;
 }
 
@@ -30,10 +68,20 @@ bool addServices() {
 }
 
 bool createTimers() {
+    RCCHECK(rclc_timer_init_default(
+        &skidiControlTimer,
+        &support,
+        RCL_MS_TO_NS(1000),
+        skidiControlCallback));
+
     return true;
 }
 
 bool addTimers() {
+    RCCHECK(rclc_executor_add_timer(
+        &executor, 
+        &skidiControlTimer));
+
     return true;
 }
 
@@ -49,12 +97,14 @@ bool createEntities() {
 
     // Create application components
     createPublishers();
+    createSubscribers();
     createServices();
     createTimers();
 
     // Create executor
     RCCHECK(rclc_executor_init(&executor, &support.context, 10+RCLC_EXECUTOR_PARAMETER_SERVER_HANDLES, &allocator));
-    // addServices();
+    addSubscribers();
+    addServices();
     addTimers();
 
     // initializeParameterService();
@@ -72,7 +122,9 @@ void destroyEntities() {
     RCSOFTCHECK(rclc_support_fini(&support));
 }
 
-void microROSTaskCallback(void* parameters) {
+void microROSTaskCallback(void* parameter) {
+    miniSkidiPtr = (MiniSkidi*) parameter;
+
     for(;;) {
         // Handle Micro-ROS tasking
         switch (agentState) {
@@ -83,12 +135,12 @@ void microROSTaskCallback(void* parameters) {
             case AGENT_AVAILABLE:
                 agentState = createEntities() ? AGENT_CONNECTED : WAITING_AGENT; // Check if entities are properly created
                 if (agentState == AGENT_CONNECTED) { // Update system state
-                    enableMotors();
+                    miniSkidiPtr->enableMotors();
                     digitalWrite(LED_BUILTIN, HIGH);
                 }
                 if (agentState == WAITING_AGENT) { // If entities are not properly created, destroy them
                     destroyEntities();
-                    disableMotors();
+                    miniSkidiPtr->disableMotors();
                     digitalWrite(LED_BUILTIN, LOW);
                 };
                 break;
@@ -104,7 +156,7 @@ void microROSTaskCallback(void* parameters) {
             case AGENT_DISCONNECTED:
                 destroyEntities();
                 agentState = WAITING_AGENT;
-                disableMotors();
+                miniSkidiPtr->disableMotors();
                 digitalWrite(LED_BUILTIN, LOW);
                 break;
                 

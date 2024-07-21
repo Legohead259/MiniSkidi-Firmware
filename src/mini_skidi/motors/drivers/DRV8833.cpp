@@ -1,4 +1,4 @@
-#include <DRV8833.h>
+#include <mini_skidi/motors/drivers/DRV8833.h>
 
 DRV8833::DRV8833(uint8_t in1, uint8_t in2, bool removeMomentum) {
     pinIn1 = in1;

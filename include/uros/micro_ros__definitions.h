@@ -2,7 +2,8 @@
 #define MICRO_ROS__DEFINITIONS_H
 
 #include <Arduino.h>
-#include "MotorInterface.h"
+#include "micro_ros__joystick_map.h"
+#include "mini_skidi/MiniSkidi.h"
 
 // The micro_ros_platformio library provides the functions to communicate with ROS2
 #include <micro_ros_platformio.h>
@@ -12,6 +13,8 @@
 #include <rclc/rclc.h>
 #include <rclc/executor.h>
 #include <rclc_parameter/rclc_parameter.h>
+#include <micro_ros_utilities/type_utilities.h>
+#include <micro_ros_utilities/string_utilities.h>
 
 // Non-Volatile Memory libraries
 #ifdef ARDUINO_ARCH_ESP32
@@ -31,16 +34,22 @@
 
 // Get the custom actions form the `motor_interfaces` package
 #include <sensor_msgs/msg/joy.h>
+#include <std_msgs/msg/bool.h>
 
 // Interface type format {package}__{interface [action/srv/msg]}__{InterfaceName}_{Additional [Response/Request]}
 // Redeclare types for readability
 using JoystickMsg = sensor_msgs__msg__Joy;
+using BoolMsg = std_msgs__msg__Bool;
+
 
 // Instantiate ROS2 base objects
 extern rcl_allocator_t allocator;
 extern rclc_support_t support;
 extern rcl_node_t node;
 extern rclc_executor_t executor;
+
+// Define application-specific objects
+extern MiniSkidi* miniSkidiPtr; ///< Pointer to the Mini Skidi platform used by the Node
 
 // Define various parameters
 

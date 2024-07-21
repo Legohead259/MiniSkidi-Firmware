@@ -2,7 +2,7 @@
 #define DRV8833_H
 
 #include <Arduino.h>
-#include "MotorInterface.h"
+#include <mini_skidi/motors/MotorInterface.h>
 
 class DRV8833 : MotorInterface {
     public:
@@ -15,7 +15,7 @@ class DRV8833 : MotorInterface {
 
         void setRemoveMomentum(bool isRemoved) override { removeMomentum = isRemoved; }
         void enable() override { isEnabled = true; }
-        void disable() override { isEnabled = false; }
+        void disable() override { stop(); isEnabled = false; }
 
     private:
         uint8_t pinIn1;

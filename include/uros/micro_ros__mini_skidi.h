@@ -3,11 +3,14 @@
 
 #include "micro_ros__definitions.h"
 #include "micro_ros__parameters.h"
-#include "micro_ros__motors.h"
+#include "micro_ros__pubsub.h"
+#include <mini_skidi/MiniSkidi.h>
 
 extern TaskHandle_t MicroROSTask;
 
 bool createPublishers();
+bool createSubscribers();
+bool addSubscribers();
 bool createServices();
 bool addServices();
 bool createTimers();
