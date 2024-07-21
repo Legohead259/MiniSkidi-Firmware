@@ -1,6 +1,7 @@
 #ifndef MINISKIDI_H
 #define MINISKIDI_H
 
+#include <ESP32Servo.h>
 #include <mini_skidi/motors/MotorInterface.h>
 
 class MiniSkidi {
@@ -8,6 +9,8 @@ private:
     MotorInterface* _leftMotor;
     MotorInterface* _rightMotor;
     MotorInterface* _armMotor;
+
+    Servo bucketServo;
 
     bool _isRunning = false;
 

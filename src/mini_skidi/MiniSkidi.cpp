@@ -50,7 +50,7 @@ void MiniSkidi::lowerArm() {
 }
 
 void MiniSkidi::start() {
-    if (_isRunning) return;
+    // if (_isRunning) return;
     _isRunning = true;
     enableMotors();
 }
@@ -64,7 +64,7 @@ void MiniSkidi::stop() {
 }
 
 void MiniSkidi::halt() {
-    if (!_isRunning) return;
+    // if (!_isRunning) return;
     stop();
     _isRunning = false;
 }

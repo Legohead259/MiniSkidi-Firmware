@@ -2,10 +2,10 @@
 #define MICRO_ROS__JOYSTICK_MAP_H
 
 namespace XboxController {
-    const double LEFT_STICK_X_TOLERANCE_MIN = -0.04;
-    const double LEFT_STICK_X_TOLERANCE_MAX = 0.04;
-    const double LEFT_STICK_Y_TOLERANCE_MIN = -0.04;
-    const double LEFT_STICK_Y_TOLERANCE_MAX = 0.04;
+    const double LEFT_STICK_X_TOLERANCE_MIN = -0.5;
+    const double LEFT_STICK_X_TOLERANCE_MAX = 0.5;
+    const double LEFT_STICK_Y_TOLERANCE_MIN = -0.5;
+    const double LEFT_STICK_Y_TOLERANCE_MAX = 0.5;
 
     const double RIGHT_STICK_X_TOLERANCE_MIN = -0.04;
     const double RIGHT_STICK_X_TOLERANCE_MAX = 0.04;
